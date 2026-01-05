@@ -10,6 +10,37 @@ interface Message {
   isTyping?: boolean;
 }
 
+// SVG Icons
+const ChatBotIcon = () => (
+  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+  </svg>
+);
+
+const BotAvatarIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+);
+
+const UserIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+  </svg>
+);
+
+const SendIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+
 export default function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -19,22 +50,21 @@ export default function FloatingChat() {
   const [isMounted, setIsMounted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Initialize audio on mount
   useEffect(() => {
     audioRef.current = new Audio('/mixkit-message-pop-alert-2354.mp3');
   }, []);
 
   const botReplies = [
-    "Terima kasih atas pertanyaannya! Ini menarik sekali. 🤔",
-    "Saya setuju dengan pendapat kamu. Boleh cerita lebih lanjut? 👂",
-    "Wah, itu sangat menarik! Saya ingin tahu lebih banyak. 📚",
-    "Bagus sekali! Apakah ada hal lain yang ingin kamu tanyakan? 💡",
-    "Saya memahami. Bisa kamu jelaskan lebih detail? 🔍",
-    "Sangat berkesan! Terima kasih telah berbagi. 🙏",
-    "Itu ide yang brilliant! Aku suka itu. ⚡",
-    "Benar sekali! Kamu punya insight yang bagus. 🎯",
-    "Menarik sekali perspektifmu tentang hal ini! 🌟",
-    "Aku akan mengingat itu. Terima kasih atas insights-nya! 💾",
+    "Terima kasih atas pertanyaannya! Ini menarik sekali.",
+    "Saya setuju dengan pendapat kamu. Boleh cerita lebih lanjut?",
+    "Wah, itu sangat menarik! Saya ingin tahu lebih banyak.",
+    "Bagus sekali! Apakah ada hal lain yang ingin kamu tanyakan?",
+    "Saya memahami. Bisa kamu jelaskan lebih detail?",
+    "Sangat berkesan! Terima kasih telah berbagi.",
+    "Itu ide yang brilliant! Saya suka pendekatan itu.",
+    "Benar sekali! Kamu punya insight yang bagus.",
+    "Menarik sekali perspektifmu tentang hal ini!",
+    "Saya akan mengingat itu. Terima kasih atas insights-nya!",
   ];
 
   const formatTime = (date: Date) => {
@@ -77,7 +107,7 @@ export default function FloatingChat() {
   const initWelcomeMessage = () => {
     const welcomeMsg: Message = {
       id: '1',
-      text: "Halo! 👋 Saya adalah Putra Bot, asisten virtual Andi Putra. Senang bertemu dengan kamu! Ada yang bisa saya bantu hari ini?",
+      text: "Halo! Saya adalah Putra Bot, asisten virtual Andi Putra. Senang bertemu dengan kamu! Ada yang bisa saya bantu hari ini?",
       sender: 'bot',
       timestamp: new Date(),
     };
@@ -135,7 +165,6 @@ export default function FloatingChat() {
         timestamp: new Date(),
       };
 
-      // Play notification sound
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch(() => { });
@@ -174,79 +203,79 @@ export default function FloatingChat() {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-violet-600 to-indigo-600 light:from-violet-500 light:to-indigo-500 text-white rounded-full shadow-lg shadow-violet-500/50 light:shadow-violet-400/40 hover:shadow-xl hover:shadow-violet-500/70 hover:scale-110 transition-all duration-300 flex items-center justify-center text-3xl z-40 group"
+        className="fixed bottom-6 right-6 w-16 h-16 bg-white light:bg-black text-black light:text-white rounded-full shadow-2xl shadow-white/20 light:shadow-black/20 hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 group animate-glow"
       >
-        <span className={`group-hover:scale-125 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-          🤖
+        <span className={`group-hover:scale-110 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          <ChatBotIcon />
         </span>
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[380px] h-[550px] bg-slate-900 light:bg-white backdrop-blur-xl border border-violet-500/30 light:border-slate-200 rounded-3xl shadow-2xl shadow-violet-500/20 light:shadow-slate-300/50 flex flex-col z-50 animate-in fade-in slide-in-from-bottom-4 duration-300 overflow-hidden">
+        <div className="fixed bottom-24 right-6 w-[380px] h-[550px] bg-black light:bg-white backdrop-blur-xl border border-neutral-700 light:border-neutral-300 rounded-3xl shadow-2xl shadow-white/10 light:shadow-black/20 flex flex-col z-50 animate-scale-in overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 px-5 py-4 flex items-center justify-between">
+          <div className="bg-white light:bg-black px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                <span className="text-2xl">🤖</span>
+              <div className="w-12 h-12 bg-black/10 light:bg-white/10 rounded-2xl flex items-center justify-center text-black light:text-white">
+                <ChatBotIcon />
               </div>
               <div>
-                <h3 className="text-white font-bold text-lg">Putra Bot</h3>
+                <h3 className="text-black light:text-white font-bold text-lg">Putra Bot</h3>
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <p className="text-violet-200 text-xs">Online • Siap membantu</p>
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <p className="text-neutral-600 light:text-neutral-400 text-xs">Online - Siap membantu</p>
                 </div>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white hover:bg-white/20 w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+              className="text-neutral-600 light:text-neutral-400 hover:text-black light:hover:text-white w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-100 light:hover:bg-neutral-800"
             >
-              ✕
+              <CloseIcon />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-900/80 light:bg-slate-50 scroll-smooth">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-neutral-950 light:bg-neutral-50 scroll-smooth">
             {Object.entries(groupedMessages).map(([dateStr, msgs]) => (
               <div key={dateStr}>
                 <div className="flex items-center gap-2 my-4">
-                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-violet-500/30 light:via-slate-300 to-transparent" />
-                  <span className="text-xs text-slate-400 light:text-slate-500 px-3 py-1 bg-slate-800/50 light:bg-white rounded-full border border-slate-700/50 light:border-slate-200">
+                  <div className="flex-1 h-px bg-neutral-800 light:bg-neutral-200" />
+                  <span className="text-xs text-neutral-500 px-3 py-1 bg-neutral-900 light:bg-white rounded-full border border-neutral-700 light:border-neutral-200">
                     {formatDate(new Date(dateStr))}
                   </span>
-                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-violet-500/30 light:via-slate-300 to-transparent" />
+                  <div className="flex-1 h-px bg-neutral-800 light:bg-neutral-200" />
                 </div>
 
                 {msgs.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} gap-2 mb-3`}>
                     {msg.sender === 'bot' && !msg.isTyping && (
-                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-violet-500/30">
-                        🤖
+                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-white light:bg-black flex items-center justify-center text-black light:text-white">
+                        <BotAvatarIcon />
                       </div>
                     )}
 
                     <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[75%]`}>
                       {msg.isTyping ? (
-                        <div className="px-4 py-3 bg-violet-500/20 light:bg-violet-100 rounded-2xl rounded-bl-md border border-violet-500/30 light:border-violet-200 flex items-center gap-3">
-                          <span className="text-slate-300 light:text-slate-600 text-sm">{msg.text}</span>
+                        <div className="px-4 py-3 bg-neutral-800 light:bg-neutral-100 rounded-2xl rounded-bl-md border border-neutral-700 light:border-neutral-200 flex items-center gap-3">
+                          <span className="text-neutral-400 light:text-neutral-600 text-sm">{msg.text}</span>
                           <div className="flex items-center gap-1">
-                            <span className="w-2 h-2 bg-violet-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                            <span className="w-2 h-2 bg-violet-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                            <span className="w-2 h-2 bg-violet-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                            <span className="w-2 h-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                            <span className="w-2 h-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                            <span className="w-2 h-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                           </div>
                         </div>
                       ) : (
                         <>
                           <div
-                            className={`px-4 py-2.5 rounded-2xl break-words shadow-sm transition-all duration-200 ${msg.sender === 'user'
-                              ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-br-md'
-                              : 'bg-slate-800/80 light:bg-white border border-slate-700/50 light:border-slate-200 text-slate-200 light:text-slate-700 rounded-bl-md'
+                            className={`px-4 py-2.5 rounded-2xl break-words transition-all duration-200 ${msg.sender === 'user'
+                              ? 'bg-white light:bg-black text-black light:text-white rounded-br-md'
+                              : 'bg-neutral-800 light:bg-neutral-100 border border-neutral-700 light:border-neutral-200 text-neutral-200 light:text-neutral-700 rounded-bl-md'
                               }`}
                           >
                             {msg.text}
                           </div>
-                          <span className="text-xs text-slate-500 light:text-slate-400 mt-1.5 px-1">
+                          <span className="text-xs text-neutral-600 mt-1.5 px-1">
                             {formatTime(msg.timestamp)}
                           </span>
                         </>
@@ -254,8 +283,8 @@ export default function FloatingChat() {
                     </div>
 
                     {msg.sender === 'user' && !msg.isTyping && (
-                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-violet-500/30">
-                        👤
+                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-neutral-800 light:bg-neutral-200 flex items-center justify-center text-neutral-400 light:text-neutral-600">
+                        <UserIcon />
                       </div>
                     )}
                   </div>
@@ -266,7 +295,7 @@ export default function FloatingChat() {
           </div>
 
           {/* Input Area */}
-          <div className="border-t border-slate-700/50 light:border-slate-200 p-4 bg-slate-900/90 light:bg-white">
+          <div className="border-t border-neutral-800 light:border-neutral-200 p-4 bg-black light:bg-white">
             <div className="flex gap-3">
               <textarea
                 value={input}
@@ -274,22 +303,20 @@ export default function FloatingChat() {
                 onKeyPress={handleKeyPress}
                 placeholder="Tulis pesan..."
                 rows={1}
-                className="flex-1 bg-slate-800/80 light:bg-slate-100 border border-slate-700/50 light:border-slate-200 rounded-xl px-4 py-3 text-slate-200 light:text-slate-900 placeholder-slate-500 light:placeholder-slate-400 focus:outline-none focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 resize-none text-sm"
+                className="flex-1 bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 rounded-xl px-4 py-3 text-white light:text-black placeholder-neutral-500 focus:outline-none focus:border-white light:focus:border-black transition-all duration-200 resize-none text-sm"
               />
               <button
                 onClick={handleSendMessage}
                 disabled={isLoading || !input.trim()}
-                className="w-12 h-12 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center hover:scale-105 active:scale-95 shadow-lg shadow-violet-500/30"
+                className="w-12 h-12 bg-white light:bg-black text-black light:text-white rounded-xl hover:bg-neutral-200 light:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center hover:scale-105 active:scale-95"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+                <SendIcon />
               </button>
             </div>
             <div className="flex items-center justify-end mt-2">
               <button
                 onClick={clearChat}
-                className="text-xs text-slate-500 light:text-slate-400 hover:text-violet-400 light:hover:text-violet-600 transition-colors duration-200"
+                className="text-xs text-neutral-600 hover:text-white light:hover:text-black transition-colors duration-200"
               >
                 Hapus chat
               </button>
@@ -301,7 +328,7 @@ export default function FloatingChat() {
       {/* Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-30 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/50 z-30 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
       )}

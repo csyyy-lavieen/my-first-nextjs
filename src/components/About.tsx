@@ -1,75 +1,119 @@
+'use client';
+
+import SpotlightCard from './animations/SpotlightCard';
+import BlurText from './animations/BlurText';
+
+// SVG Icons for skills
+const DesignIcon = () => (
+  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+  </svg>
+);
+
+const CodeIcon = () => (
+  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+  </svg>
+);
+
+const StyleIcon = () => (
+  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+  </svg>
+);
+
+const ToolsIcon = () => (
+  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+);
+
 export default function About() {
   const skills = [
-    { category: 'Design', icon: '🎨', items: ['Figma', 'UI Design', 'UX Research', 'Prototyping'] },
-    { category: 'Frontend', icon: '⚛️', items: ['React', 'Next.js', 'TypeScript', 'JavaScript'] },
-    { category: 'Styling', icon: '🎭', items: ['Tailwind CSS', 'CSS3', 'Responsive Design'] },
-    { category: 'Tools', icon: '🛠️', items: ['Git', 'GitHub', 'VS Code'] },
+    { category: 'Design', icon: <DesignIcon />, items: ['Figma', 'UI Design', 'UX Research', 'Prototyping'] },
+    { category: 'Frontend', icon: <CodeIcon />, items: ['React', 'Next.js', 'TypeScript', 'JavaScript'] },
+    { category: 'Styling', icon: <StyleIcon />, items: ['Tailwind CSS', 'CSS3', 'Responsive Design'] },
+    { category: 'Tools', icon: <ToolsIcon />, items: ['Git', 'GitHub', 'VS Code'] },
+  ];
+
+  const stats = [
+    { value: '6+', label: 'Project Completed' },
+    { value: '2+', label: 'Years Experience' },
+    { value: '100%', label: 'Client Satisfaction' },
   ];
 
   return (
-    <section id="about" className="relative py-24 bg-slate-950 light:bg-slate-50 border-t border-slate-800 light:border-slate-200 transition-colors duration-300">
+    <section id="about" className="relative py-24 bg-neutral-950 light:bg-neutral-50 border-t border-neutral-800 light:border-neutral-200 transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white light:text-slate-900 mb-4 animate-fade-up animation-delay-100">Tentang Saya</h2>
-          <p className="text-xl text-slate-400 light:text-slate-600 max-w-2xl mx-auto animate-fade-up animation-delay-200">
-            Seorang developer muda yang passionate tentang menciptakan solusi digital
+          <h2 className="text-5xl font-bold text-white light:text-black mb-4">
+            <BlurText text="Tentang Saya" delay={100} />
+          </h2>
+          <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
+            Software Engineer dengan spesialisasi Frontend Development
           </p>
         </div>
 
         {/* Content */}
         <div className="grid lg:grid-cols-3 gap-12 mb-16">
-          <div className="lg:col-span-2 space-y-6 animate-fade-up animation-delay-300">
-            <p className="text-slate-400 light:text-slate-700 leading-8 text-lg">
-              Saya adalah seorang siswa kelas 12 jurusan Rekayasa Perangkat Lunak (RPL) dengan passion mendalam terhadap UI/UX Design dan Web Development. Perjalanan saya dimulai dengan keinginan untuk menciptakan pengalaman digital yang tidak hanya cantik, tetapi juga intuitif dan user-centric.
+          <div className="lg:col-span-2 space-y-6">
+            <p className="text-neutral-400 light:text-neutral-600 leading-8 text-lg animate-slide-left animation-delay-200">
+              Saya adalah siswa SMK jurusan Rekayasa Perangkat Lunak (RPL) yang saat ini sedang menjalani{' '}
+              <span className="text-white light:text-black font-semibold">internship di PT Ashari Tech, Bandung</span>.
+              Passion saya terletak pada UI/UX Design dan Frontend Development.
             </p>
-            <p className="text-slate-400 light:text-slate-700 leading-8 text-lg">
-              Saya percaya bahwa desain yang efektif adalah perpaduan sempurna antara estetika dan fungsionalitas. Setiap keputusan desain dan setiap baris kode ditulis dengan tujuan yang jelas: memberikan nilai maksimal kepada pengguna.
+            <p className="text-neutral-400 light:text-neutral-600 leading-8 text-lg animate-slide-left animation-delay-300">
+              Sebagai Software Engineer yang berspesialisasi sebagai Frontend Developer, saya percaya bahwa desain yang efektif
+              adalah perpaduan sempurna antara estetika dan fungsionalitas.
             </p>
-            <p className="text-slate-400 light:text-slate-700 leading-8 text-lg">
-              Tujuan saya adalah berkembang menjadi profesional di bidang UI/UX Design dan Frontend Development yang mampu menciptakan solusi digital inovatif dan memberikan dampak positif bagi pengguna dan bisnis.
+            <p className="text-neutral-400 light:text-neutral-600 leading-8 text-lg animate-slide-left animation-delay-400">
+              Tujuan saya adalah berkembang menjadi profesional yang mampu menciptakan solusi digital inovatif dan
+              memberikan dampak positif bagi pengguna dan bisnis.
             </p>
           </div>
 
           {/* Quick Stats */}
-          <div className="space-y-4 animate-fade-up animation-delay-400">
-            <div className="bg-slate-900 light:bg-white rounded-lg p-6 border border-slate-800 light:border-slate-200 hover:border-blue-500/60 light:hover:border-blue-500 transition-all light:shadow-sm">
-              <p className="text-3xl font-bold text-blue-400 light:text-blue-600 mb-1">6+</p>
-              <p className="text-slate-400 light:text-slate-600">Project Completed</p>
-            </div>
-            <div className="bg-slate-900 light:bg-white rounded-lg p-6 border border-slate-800 light:border-slate-200 hover:border-cyan-500/60 light:hover:border-cyan-500 transition-all light:shadow-sm">
-              <p className="text-3xl font-bold text-cyan-400 light:text-cyan-600 mb-1">2+</p>
-              <p className="text-slate-400 light:text-slate-600">Years Experience</p>
-            </div>
-            <div className="bg-slate-900 light:bg-white rounded-lg p-6 border border-slate-800 light:border-slate-200 hover:border-blue-500/60 light:hover:border-blue-500 transition-all light:shadow-sm">
-              <p className="text-3xl font-bold text-blue-400 light:text-blue-600 mb-1">100%</p>
-              <p className="text-slate-400 light:text-slate-600">Client Satisfaction</p>
-            </div>
+          <div className="space-y-4">
+            {stats.map((stat, index) => (
+              <SpotlightCard
+                key={stat.label}
+                className="bg-black light:bg-white rounded-xl p-6 border border-neutral-800 light:border-neutral-200 hover:border-neutral-600 light:hover:border-neutral-400 transition-all animate-slide-right"
+              >
+                <p className="text-4xl font-bold text-white light:text-black mb-1 animate-gradient-text">{stat.value}</p>
+                <p className="text-neutral-500">{stat.label}</p>
+              </SpotlightCard>
+            ))}
           </div>
         </div>
 
         {/* Skills */}
-        <div className="animate-fade-up animation-delay-500">
-          <h3 className="text-3xl font-bold text-white light:text-slate-900 mb-8 text-center">Skills & Tools</h3>
+        <div>
+          <h3 className="text-3xl font-bold text-white light:text-black mb-8 text-center animate-blur-reveal">
+            Skills & Tools
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((skillGroup) => (
-              <div
+            {skills.map((skillGroup, index) => (
+              <SpotlightCard
                 key={skillGroup.category}
-                className="bg-slate-900 light:bg-white rounded-lg p-6 border border-slate-800 light:border-slate-200 hover:border-blue-500/60 light:hover:border-blue-500 transition-all hover:shadow-lg hover:shadow-blue-500/20 light:hover:shadow-blue-500/10 hover:-translate-y-2 duration-300 light:shadow-sm"
+                className="bg-black light:bg-white rounded-xl p-6 border border-neutral-800 light:border-neutral-200 hover:border-neutral-600 light:hover:border-neutral-400 transition-all duration-300 hover:-translate-y-2 animate-scale-in"
               >
-                <p className="text-4xl mb-3">{skillGroup.icon}</p>
-                <h4 className="text-lg font-bold text-blue-400 light:text-blue-600 mb-4">
+                <div className="text-neutral-400 light:text-neutral-600 mb-4 group-hover:text-white light:group-hover:text-black transition-colors">
+                  {skillGroup.icon}
+                </div>
+                <h4 className="text-lg font-bold text-white light:text-black mb-4">
                   {skillGroup.category}
                 </h4>
                 <div className="space-y-2">
                   {skillGroup.items.map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full" />
-                      <span className="text-slate-400 light:text-slate-600 text-sm">{skill}</span>
+                      <span className="w-1.5 h-1.5 bg-white light:bg-black rounded-full" />
+                      <span className="text-neutral-500 text-sm">{skill}</span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </div>

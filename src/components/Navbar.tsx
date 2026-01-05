@@ -4,6 +4,31 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useTheme } from '@/lib/ThemeContext';
 
+// SVG Icons
+const SunIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
+);
+
+const MenuIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -16,10 +41,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-950/95 light:bg-white/95 border-b border-slate-800 light:border-slate-200 shadow-lg shadow-black/30 light:shadow-slate-200/30 backdrop-blur-xl transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-black/90 light:bg-white/90 border-b border-neutral-800 light:border-neutral-200 backdrop-blur-xl transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="#home" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 light:from-blue-600 light:to-cyan-600 bg-clip-text text-transparent hover:scale-105 transition-transform">
+        <Link href="#home" className="text-2xl font-bold text-white light:text-black hover:opacity-70 hover:scale-105 transition-all">
           AP
         </Link>
 
@@ -29,21 +54,20 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-slate-300 light:text-slate-600 hover:text-blue-400 light:hover:text-blue-600 transition-colors font-medium text-sm relative group"
+              className="animated-underline text-neutral-400 light:text-neutral-600 hover:text-white light:hover:text-black transition-colors font-medium text-sm"
             >
               {link.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
             </a>
           ))}
 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-slate-800 light:bg-slate-200 border border-slate-700 light:border-slate-300 hover:bg-slate-700 light:hover:bg-slate-300 transition-all duration-300 flex items-center justify-center text-lg hover:scale-110 active:scale-95"
+            className="w-10 h-10 rounded-full bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 hover:border-white light:hover:border-black transition-all duration-300 flex items-center justify-center text-neutral-400 light:text-neutral-600 hover:text-white light:hover:text-black hover:scale-110 active:scale-95"
             aria-label="Toggle theme"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
         </div>
 
@@ -52,37 +76,32 @@ export default function Navbar() {
           {/* Mobile Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-slate-800 light:bg-slate-200 border border-slate-700 light:border-slate-300 hover:bg-slate-700 light:hover:bg-slate-300 transition-all duration-300 flex items-center justify-center text-lg active:scale-95"
+            className="w-10 h-10 rounded-full bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 transition-all duration-300 flex items-center justify-center text-neutral-400 light:text-neutral-600 active:scale-95"
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
 
           {/* Hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-slate-300 light:text-slate-600 p-2 hover:bg-slate-800 light:hover:bg-slate-100 rounded-lg transition-colors"
+            className="text-neutral-400 light:text-neutral-600 p-2 hover:text-white light:hover:text-black rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-slate-900 light:bg-white border-t border-slate-800 light:border-slate-200 px-6 py-4 space-y-2 backdrop-blur-lg transition-colors duration-300">
-          {navLinks.map((link) => (
+        <div className="md:hidden bg-black light:bg-white border-t border-neutral-800 light:border-neutral-200 px-6 py-4 space-y-2 animate-fade-up">
+          {navLinks.map((link, index) => (
             <a
               key={link.href}
               href={link.href}
-              className="block text-slate-300 light:text-slate-600 hover:text-blue-400 light:hover:text-blue-600 py-2 font-medium transition-colors"
+              className="block text-neutral-400 light:text-neutral-600 hover:text-white light:hover:text-black py-2 font-medium transition-colors animate-slide-left"
+              style={{ animationDelay: `${index * 50}ms` }}
               onClick={() => setIsMenuOpen(false)}
             >
               {link.label}
