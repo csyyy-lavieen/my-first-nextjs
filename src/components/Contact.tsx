@@ -62,11 +62,11 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-24 bg-neutral-950 light:bg-neutral-50 border-t border-neutral-800 light:border-neutral-200 overflow-hidden transition-colors duration-300">
+    <section id="contact" className="relative py-24 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800 overflow-hidden transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white light:text-black mb-4">
+          <h2 className="text-5xl font-bold text-black dark:text-white mb-4">
             <BlurText text="Mari Terhubung" delay={100} />
           </h2>
           <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
@@ -75,11 +75,11 @@ export default function Contact() {
         </div>
 
         {/* Contact Info */}
-        <SpotlightCard className="bg-black light:bg-white rounded-2xl p-8 md:p-12 border border-neutral-800 light:border-neutral-200 mb-12 animate-scale-in">
+        <SpotlightCard className="bg-white dark:bg-black rounded-2xl p-8 md:p-12 border border-neutral-200 dark:border-neutral-800 mb-12 animate-scale-in">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Left */}
             <div>
-              <h3 className="text-2xl font-bold text-white light:text-black mb-6">Hubungi Saya</h3>
+              <h3 className="text-2xl font-bold text-black dark:text-white mb-6">Hubungi Saya</h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div
@@ -87,13 +87,13 @@ export default function Contact() {
                     className="flex items-start gap-4 animate-slide-left"
                     style={{ animationDelay: `${(index + 1) * 100}ms` }}
                   >
-                    <span className="text-neutral-500 group-hover:text-white transition-colors">{info.icon}</span>
+                    <span className="text-neutral-500 group-hover:text-black dark:group-hover:text-white transition-colors">{info.icon}</span>
                     <div>
-                      <p className="font-semibold text-white light:text-black">{info.title}</p>
+                      <p className="font-semibold text-black dark:text-white">{info.title}</p>
                       {info.isLink ? (
                         <a
                           href={`mailto:${info.value}`}
-                          className="text-neutral-500 hover:text-white light:hover:text-black transition-colors animated-underline"
+                          className="text-neutral-500 hover:text-black dark:hover:text-white transition-colors animated-underline"
                         >
                           {info.value}
                         </a>
@@ -108,7 +108,7 @@ export default function Contact() {
 
             {/* Right - Social Links */}
             <div>
-              <h3 className="text-2xl font-bold text-white light:text-black mb-6">Temukan Saya</h3>
+              <h3 className="text-2xl font-bold text-black dark:text-white mb-6">Temukan Saya</h3>
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((link, index) => (
                   <a
@@ -116,13 +116,13 @@ export default function Contact() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center justify-center p-4 bg-neutral-900 light:bg-neutral-100 hover:bg-neutral-800 light:hover:bg-neutral-200 border border-neutral-800 light:border-neutral-200 hover:border-neutral-600 light:hover:border-neutral-400 rounded-xl transition-all duration-300 group hover:scale-105 animate-scale-in"
+                    className="flex flex-col items-center justify-center p-4 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 rounded-xl transition-all duration-300 group hover:scale-105 animate-scale-in"
                     style={{ animationDelay: `${(index + 1) * 100}ms` }}
                   >
-                    <div className="text-neutral-500 group-hover:text-white light:group-hover:text-black mb-2 transition-colors duration-300 group-hover:scale-110">
+                    <div className="text-neutral-500 group-hover:text-black dark:group-hover:text-white mb-2 transition-colors duration-300 group-hover:scale-110">
                       {link.icon}
                     </div>
-                    <p className="text-neutral-400 light:text-neutral-600 font-semibold text-sm text-center group-hover:text-white light:group-hover:text-black transition-colors">
+                    <p className="text-neutral-600 dark:text-neutral-400 font-semibold text-sm text-center group-hover:text-black dark:group-hover:text-white transition-colors">
                       {link.name}
                     </p>
                   </a>
@@ -133,7 +133,7 @@ export default function Contact() {
         </SpotlightCard>
 
         {/* Footer */}
-        <div className="text-center border-t border-neutral-800 light:border-neutral-200 pt-8 animate-fade-up">
+        <div className="text-center border-t border-neutral-200 dark:border-neutral-800 pt-8 animate-fade-up">
           <p className="text-neutral-600 mb-2">
             © 2026 Andi Putra Fathahillah. All rights reserved.
           </p>

@@ -203,7 +203,7 @@ export default function FloatingChat() {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-white light:bg-black text-black light:text-white rounded-full shadow-2xl shadow-white/20 light:shadow-black/20 hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 group animate-glow"
+        className="fixed bottom-6 right-6 w-16 h-16 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-2xl shadow-black/20 dark:shadow-white/20 hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 group animate-glow"
       >
         <span className={`group-hover:scale-110 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
           <ChatBotIcon />
@@ -212,53 +212,53 @@ export default function FloatingChat() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[380px] h-[550px] bg-black light:bg-white backdrop-blur-xl border border-neutral-700 light:border-neutral-300 rounded-3xl shadow-2xl shadow-white/10 light:shadow-black/20 flex flex-col z-50 animate-scale-in overflow-hidden">
+        <div className="fixed bottom-24 right-6 w-[380px] h-[550px] bg-white dark:bg-black backdrop-blur-xl border border-neutral-300 dark:border-neutral-700 rounded-3xl shadow-2xl shadow-black/20 dark:shadow-white/10 flex flex-col z-50 animate-scale-in overflow-hidden">
           {/* Header */}
-          <div className="bg-white light:bg-black px-5 py-4 flex items-center justify-between">
+          <div className="bg-black dark:bg-white px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-black/10 light:bg-white/10 rounded-2xl flex items-center justify-center text-black light:text-white">
+              <div className="w-12 h-12 bg-white/10 dark:bg-black/10 rounded-2xl flex items-center justify-center text-white dark:text-black">
                 <ChatBotIcon />
               </div>
               <div>
-                <h3 className="text-black light:text-white font-bold text-lg">Putra Bot</h3>
+                <h3 className="text-white dark:text-black font-bold text-lg">Putra Bot</h3>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <p className="text-neutral-600 light:text-neutral-400 text-xs">Online - Siap membantu</p>
+                  <p className="text-neutral-400 dark:text-neutral-600 text-xs">Online - Siap membantu</p>
                 </div>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-neutral-600 light:text-neutral-400 hover:text-black light:hover:text-white w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-100 light:hover:bg-neutral-800"
+              className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-black w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-800 dark:hover:bg-neutral-100"
             >
               <CloseIcon />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-neutral-950 light:bg-neutral-50 scroll-smooth">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-neutral-50 dark:bg-neutral-950 scroll-smooth">
             {Object.entries(groupedMessages).map(([dateStr, msgs]) => (
               <div key={dateStr}>
                 <div className="flex items-center gap-2 my-4">
-                  <div className="flex-1 h-px bg-neutral-800 light:bg-neutral-200" />
-                  <span className="text-xs text-neutral-500 px-3 py-1 bg-neutral-900 light:bg-white rounded-full border border-neutral-700 light:border-neutral-200">
+                  <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
+                  <span className="text-xs text-neutral-500 px-3 py-1 bg-white dark:bg-neutral-900 rounded-full border border-neutral-200 dark:border-neutral-700">
                     {formatDate(new Date(dateStr))}
                   </span>
-                  <div className="flex-1 h-px bg-neutral-800 light:bg-neutral-200" />
+                  <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-800" />
                 </div>
 
                 {msgs.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} gap-2 mb-3`}>
                     {msg.sender === 'bot' && !msg.isTyping && (
-                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-white light:bg-black flex items-center justify-center text-black light:text-white">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black">
                         <BotAvatarIcon />
                       </div>
                     )}
 
                     <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[75%]`}>
                       {msg.isTyping ? (
-                        <div className="px-4 py-3 bg-neutral-800 light:bg-neutral-100 rounded-2xl rounded-bl-md border border-neutral-700 light:border-neutral-200 flex items-center gap-3">
-                          <span className="text-neutral-400 light:text-neutral-600 text-sm">{msg.text}</span>
+                        <div className="px-4 py-3 bg-neutral-100 dark:bg-neutral-800 rounded-2xl rounded-bl-md border border-neutral-200 dark:border-neutral-700 flex items-center gap-3">
+                          <span className="text-neutral-600 dark:text-neutral-400 text-sm">{msg.text}</span>
                           <div className="flex items-center gap-1">
                             <span className="w-2 h-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                             <span className="w-2 h-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -269,8 +269,8 @@ export default function FloatingChat() {
                         <>
                           <div
                             className={`px-4 py-2.5 rounded-2xl break-words transition-all duration-200 ${msg.sender === 'user'
-                              ? 'bg-white light:bg-black text-black light:text-white rounded-br-md'
-                              : 'bg-neutral-800 light:bg-neutral-100 border border-neutral-700 light:border-neutral-200 text-neutral-200 light:text-neutral-700 rounded-bl-md'
+                              ? 'bg-black dark:bg-white text-white dark:text-black rounded-br-md'
+                              : 'bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-bl-md'
                               }`}
                           >
                             {msg.text}
@@ -283,7 +283,7 @@ export default function FloatingChat() {
                     </div>
 
                     {msg.sender === 'user' && !msg.isTyping && (
-                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-neutral-800 light:bg-neutral-200 flex items-center justify-center text-neutral-400 light:text-neutral-600">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-400">
                         <UserIcon />
                       </div>
                     )}
@@ -295,7 +295,7 @@ export default function FloatingChat() {
           </div>
 
           {/* Input Area */}
-          <div className="border-t border-neutral-800 light:border-neutral-200 p-4 bg-black light:bg-white">
+          <div className="border-t border-neutral-200 dark:border-neutral-800 p-4 bg-white dark:bg-black">
             <div className="flex gap-3">
               <textarea
                 value={input}
@@ -303,12 +303,12 @@ export default function FloatingChat() {
                 onKeyPress={handleKeyPress}
                 placeholder="Tulis pesan..."
                 rows={1}
-                className="flex-1 bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 rounded-xl px-4 py-3 text-white light:text-black placeholder-neutral-500 focus:outline-none focus:border-white light:focus:border-black transition-all duration-200 resize-none text-sm"
+                className="flex-1 bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl px-4 py-3 text-black dark:text-white placeholder-neutral-500 focus:outline-none focus:border-black dark:focus:border-white transition-all duration-200 resize-none text-sm"
               />
               <button
                 onClick={handleSendMessage}
                 disabled={isLoading || !input.trim()}
-                className="w-12 h-12 bg-white light:bg-black text-black light:text-white rounded-xl hover:bg-neutral-200 light:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center hover:scale-105 active:scale-95"
+                className="w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center hover:scale-105 active:scale-95"
               >
                 <SendIcon />
               </button>
@@ -316,7 +316,7 @@ export default function FloatingChat() {
             <div className="flex items-center justify-end mt-2">
               <button
                 onClick={clearChat}
-                className="text-xs text-neutral-600 hover:text-white light:hover:text-black transition-colors duration-200"
+                className="text-xs text-neutral-600 hover:text-black dark:hover:text-white transition-colors duration-200"
               >
                 Hapus chat
               </button>

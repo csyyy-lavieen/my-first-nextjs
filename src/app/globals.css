@@ -1,29 +1,22 @@
 @import "tailwindcss";
 
-/* Custom light: variant - applies styles when NOT in dark mode */
-@variant light (&:where(:not(.dark) *));
+/* Enable dark mode with class selector */
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --muted: #a3a3a3;
-  --border: #262626;
-}
-
-html.dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --muted: #a3a3a3;
-  --border: #262626;
-  color-scheme: dark;
-}
-
-html:not(.dark) {
   --background: #ffffff;
   --foreground: #000000;
   --muted: #525252;
   --border: #e5e5e5;
   color-scheme: light;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --muted: #a3a3a3;
+  --border: #262626;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -139,8 +132,24 @@ html {
   }
 }
 
-.animate-glow {
+.dark .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow-light {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.1);
+  }
+}
+
+:not(.dark) .animate-glow {
+  animation: glow-light 2s ease-in-out infinite;
 }
 
 /* Pulse Scale */
@@ -296,7 +305,7 @@ html {
   }
 }
 
-.animate-gradient-text {
+.dark .animate-gradient-text {
   background: linear-gradient(90deg, #ffffff, #a3a3a3, #ffffff);
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
@@ -305,7 +314,7 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
-html:not(.dark) .animate-gradient-text {
+:not(.dark) .animate-gradient-text {
   background: linear-gradient(90deg, #000000, #525252, #000000);
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
@@ -343,7 +352,7 @@ html:not(.dark) .animate-gradient-text {
   overflow: hidden;
 }
 
-.spotlight-card::before {
+.dark .spotlight-card::before {
   content: '';
   position: absolute;
   top: var(--mouse-y, 50%);
@@ -357,25 +366,22 @@ html:not(.dark) .animate-gradient-text {
   pointer-events: none;
 }
 
-html:not(.dark) .spotlight-card::before {
+:not(.dark) .spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  width: 300px;
+  height: 300px;
   background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .spotlight-card:hover::before {
   opacity: 1;
-}
-
-/* Scroll triggered animation */
-@supports (animation-timeline: view()) {
-
-  .animate-fade-up,
-  .animate-blur-reveal,
-  .animate-slide-left,
-  .animate-slide-right,
-  .animate-scale-in {
-    animation-timeline: view();
-    animation-range: entry 0% cover 30%;
-  }
 }
 
 /* Tilt Card 3D Effect */

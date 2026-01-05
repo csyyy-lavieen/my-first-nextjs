@@ -41,10 +41,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/90 light:bg-white/90 border-b border-neutral-800 light:border-neutral-200 backdrop-blur-xl transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-white/90 dark:bg-black/90 border-b border-neutral-200 dark:border-neutral-800 backdrop-blur-xl transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="#home" className="text-2xl font-bold text-white light:text-black hover:opacity-70 hover:scale-105 transition-all">
+        <Link href="#home" className="text-2xl font-bold text-black dark:text-white hover:opacity-70 hover:scale-105 transition-all">
           AP
         </Link>
 
@@ -54,7 +54,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="animated-underline text-neutral-400 light:text-neutral-600 hover:text-white light:hover:text-black transition-colors font-medium text-sm"
+              className="animated-underline text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-medium text-sm"
             >
               {link.label}
             </a>
@@ -63,7 +63,7 @@ export default function Navbar() {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 hover:border-white light:hover:border-black transition-all duration-300 flex items-center justify-center text-neutral-400 light:text-neutral-600 hover:text-white light:hover:text-black hover:scale-110 active:scale-95"
+            className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white transition-all duration-300 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:scale-110 active:scale-95"
             aria-label="Toggle theme"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Mobile Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 transition-all duration-300 flex items-center justify-center text-neutral-400 light:text-neutral-600 active:scale-95"
+            className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 transition-all duration-300 flex items-center justify-center text-neutral-600 dark:text-neutral-400 active:scale-95"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
@@ -85,7 +85,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-neutral-400 light:text-neutral-600 p-2 hover:text-white light:hover:text-black rounded-lg transition-colors"
+            className="text-neutral-600 dark:text-neutral-400 p-2 hover:text-black dark:hover:text-white rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -95,12 +95,12 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-black light:bg-white border-t border-neutral-800 light:border-neutral-200 px-6 py-4 space-y-2 animate-fade-up">
+        <div className="md:hidden bg-white dark:bg-black border-t border-neutral-200 dark:border-neutral-800 px-6 py-4 space-y-2 animate-fade-up">
           {navLinks.map((link, index) => (
             <a
               key={link.href}
               href={link.href}
-              className="block text-neutral-400 light:text-neutral-600 hover:text-white light:hover:text-black py-2 font-medium transition-colors animate-slide-left"
+              className="block text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white py-2 font-medium transition-colors animate-slide-left"
               style={{ animationDelay: `${index * 50}ms` }}
               onClick={() => setIsMenuOpen(false)}
             >

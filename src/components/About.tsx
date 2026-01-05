@@ -44,11 +44,11 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="relative py-24 bg-neutral-950 light:bg-neutral-50 border-t border-neutral-800 light:border-neutral-200 transition-colors duration-300">
+    <section id="about" className="relative py-24 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800 transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white light:text-black mb-4">
+          <h2 className="text-5xl font-bold text-black dark:text-white mb-4">
             <BlurText text="Tentang Saya" delay={100} />
           </h2>
           <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
@@ -59,16 +59,16 @@ export default function About() {
         {/* Content */}
         <div className="grid lg:grid-cols-3 gap-12 mb-16">
           <div className="lg:col-span-2 space-y-6">
-            <p className="text-neutral-400 light:text-neutral-600 leading-8 text-lg animate-slide-left animation-delay-200">
+            <p className="text-neutral-600 dark:text-neutral-400 leading-8 text-lg animate-slide-left animation-delay-200">
               Saya adalah siswa SMK jurusan Rekayasa Perangkat Lunak (RPL) yang saat ini sedang menjalani{' '}
-              <span className="text-white light:text-black font-semibold">internship di PT Ashari Tech, Bandung</span>.
+              <span className="text-black dark:text-white font-semibold">internship di PT Ashari Tech, Bandung</span>.
               Passion saya terletak pada UI/UX Design dan Frontend Development.
             </p>
-            <p className="text-neutral-400 light:text-neutral-600 leading-8 text-lg animate-slide-left animation-delay-300">
+            <p className="text-neutral-600 dark:text-neutral-400 leading-8 text-lg animate-slide-left animation-delay-300">
               Sebagai Software Engineer yang berspesialisasi sebagai Frontend Developer, saya percaya bahwa desain yang efektif
               adalah perpaduan sempurna antara estetika dan fungsionalitas.
             </p>
-            <p className="text-neutral-400 light:text-neutral-600 leading-8 text-lg animate-slide-left animation-delay-400">
+            <p className="text-neutral-600 dark:text-neutral-400 leading-8 text-lg animate-slide-left animation-delay-400">
               Tujuan saya adalah berkembang menjadi profesional yang mampu menciptakan solusi digital inovatif dan
               memberikan dampak positif bagi pengguna dan bisnis.
             </p>
@@ -79,9 +79,9 @@ export default function About() {
             {stats.map((stat, index) => (
               <SpotlightCard
                 key={stat.label}
-                className="bg-black light:bg-white rounded-xl p-6 border border-neutral-800 light:border-neutral-200 hover:border-neutral-600 light:hover:border-neutral-400 transition-all animate-slide-right"
+                className="bg-white dark:bg-black rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all animate-slide-right"
               >
-                <p className="text-4xl font-bold text-white light:text-black mb-1 animate-gradient-text">{stat.value}</p>
+                <p className="text-4xl font-bold text-black dark:text-white mb-1 animate-gradient-text">{stat.value}</p>
                 <p className="text-neutral-500">{stat.label}</p>
               </SpotlightCard>
             ))}
@@ -90,25 +90,25 @@ export default function About() {
 
         {/* Skills */}
         <div>
-          <h3 className="text-3xl font-bold text-white light:text-black mb-8 text-center animate-blur-reveal">
+          <h3 className="text-3xl font-bold text-black dark:text-white mb-8 text-center animate-blur-reveal">
             Skills & Tools
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skillGroup, index) => (
               <SpotlightCard
                 key={skillGroup.category}
-                className="bg-black light:bg-white rounded-xl p-6 border border-neutral-800 light:border-neutral-200 hover:border-neutral-600 light:hover:border-neutral-400 transition-all duration-300 hover:-translate-y-2 animate-scale-in"
+                className="bg-white dark:bg-black rounded-xl p-6 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300 hover:-translate-y-2 animate-scale-in"
               >
-                <div className="text-neutral-400 light:text-neutral-600 mb-4 group-hover:text-white light:group-hover:text-black transition-colors">
+                <div className="text-neutral-600 dark:text-neutral-400 mb-4 group-hover:text-black dark:group-hover:text-white transition-colors">
                   {skillGroup.icon}
                 </div>
-                <h4 className="text-lg font-bold text-white light:text-black mb-4">
+                <h4 className="text-lg font-bold text-black dark:text-white mb-4">
                   {skillGroup.category}
                 </h4>
                 <div className="space-y-2">
                   {skillGroup.items.map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-white light:bg-black rounded-full" />
+                      <span className="w-1.5 h-1.5 bg-black dark:bg-white rounded-full" />
                       <span className="text-neutral-500 text-sm">{skill}</span>
                     </div>
                   ))}

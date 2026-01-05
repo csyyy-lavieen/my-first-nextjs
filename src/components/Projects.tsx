@@ -56,11 +56,11 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="relative py-24 bg-black light:bg-white border-t border-neutral-800 light:border-neutral-200 overflow-hidden transition-colors duration-300">
+    <section id="projects" className="relative py-24 bg-white dark:bg-black border-t border-neutral-200 dark:border-neutral-800 overflow-hidden transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white light:text-black mb-4">
+          <h2 className="text-5xl font-bold text-black dark:text-white mb-4">
             <BlurText text="Upcoming Projects" delay={100} />
           </h2>
           <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
@@ -73,7 +73,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <TiltCard key={project.id}>
               <div
-                className="group relative bg-neutral-950 light:bg-neutral-50 rounded-xl overflow-hidden border border-neutral-800 light:border-neutral-200 hover:border-neutral-600 light:hover:border-neutral-400 transition-all duration-500 animate-scale-in"
+                className="group relative bg-neutral-50 dark:bg-neutral-950 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 animate-scale-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Image */}
@@ -95,7 +95,7 @@ export default function Projects() {
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="text-lg font-bold text-white light:text-black mb-2 group-hover:translate-x-1 transition-transform duration-300">
+                  <h3 className="text-lg font-bold text-black dark:text-white mb-2 group-hover:translate-x-1 transition-transform duration-300">
                     {project.title}
                   </h3>
                   <p className="text-neutral-500 text-sm mb-4 line-clamp-2">
@@ -107,7 +107,7 @@ export default function Projects() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 bg-neutral-900 light:bg-neutral-100 border border-neutral-700 light:border-neutral-300 text-neutral-400 light:text-neutral-600 text-xs rounded font-medium"
+                        className="px-2 py-1 bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs rounded font-medium"
                       >
                         {tag}
                       </span>
@@ -116,7 +116,7 @@ export default function Projects() {
                 </div>
 
                 {/* Hover Overlay Line */}
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white light:bg-black group-hover:w-full transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-black dark:bg-white group-hover:w-full transition-all duration-500" />
               </div>
             </TiltCard>
           ))}
