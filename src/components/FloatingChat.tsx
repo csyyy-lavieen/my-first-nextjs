@@ -249,7 +249,7 @@ export default function FloatingChat() {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-2xl shadow-black/20 dark:shadow-white/20 hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 group animate-glow"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-2xl shadow-black/20 dark:shadow-white/20 hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 group animate-glow"
       >
         <span className={`group-hover:scale-110 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
           <ChatBotIcon />
@@ -258,7 +258,7 @@ export default function FloatingChat() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[420px] h-[580px] bg-white dark:bg-black backdrop-blur-xl border border-neutral-300 dark:border-neutral-700 rounded-3xl shadow-2xl shadow-black/20 dark:shadow-white/10 flex flex-col z-50 animate-scale-in overflow-hidden font-sans antialiased">
+        <div className="fixed bottom-20 sm:bottom-24 left-2 right-2 sm:left-auto sm:right-6 sm:w-[420px] h-[70vh] sm:h-[580px] max-h-[600px] bg-white dark:bg-black backdrop-blur-xl border border-neutral-300 dark:border-neutral-700 rounded-2xl sm:rounded-3xl shadow-2xl shadow-black/20 dark:shadow-white/10 flex flex-col z-50 animate-scale-in overflow-hidden font-sans antialiased">
           {/* Header */}
           <div className="bg-black dark:bg-white px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
