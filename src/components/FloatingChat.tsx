@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   id: string;
@@ -41,6 +42,21 @@ const CloseIcon = () => (
   </svg>
 );
 
+const CopyIcon = () => (
+  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+// Constants
+const MAX_HISTORY_MESSAGES = 10;
+
 export default function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -49,23 +65,44 @@ export default function FloatingChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
     audioRef.current = new Audio('/mixkit-message-pop-alert-2354.mp3');
   }, []);
 
-  const botReplies = [
-    "Terima kasih atas pertanyaannya! Ini menarik sekali.",
-    "Saya setuju dengan pendapat kamu. Boleh cerita lebih lanjut?",
-    "Wah, itu sangat menarik! Saya ingin tahu lebih banyak.",
-    "Bagus sekali! Apakah ada hal lain yang ingin kamu tanyakan?",
-    "Saya memahami. Bisa kamu jelaskan lebih detail?",
-    "Sangat berkesan! Terima kasih telah berbagi.",
-    "Itu ide yang brilliant! Saya suka pendekatan itu.",
-    "Benar sekali! Kamu punya insight yang bagus.",
-    "Menarik sekali perspektifmu tentang hal ini!",
-    "Saya akan mengingat itu. Terima kasih atas insights-nya!",
-  ];
+  // Fungsi untuk mengirim pesan ke AI API
+  const sendMessageToAI = async (userMessage: string): Promise<string> => {
+    try {
+      // Siapkan history untuk context
+      const history = messages.slice(-MAX_HISTORY_MESSAGES).map((msg) => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant',
+        content: msg.text,
+      }));
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          history: history,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Gagal mendapatkan response');
+      }
+
+      return data.message;
+    } catch (error) {
+      console.error('Error calling AI:', error);
+      return 'Maaf, terjadi kesalahan. Coba lagi ya! 😅';
+    }
+  };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
@@ -130,12 +167,20 @@ export default function FloatingChat() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = () => {
-    if (!input.trim()) return;
+  // Auto scroll to bottom when opening chat
+  useEffect(() => {
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [isOpen]);
 
+  const handleSendMessage = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userInput = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: input,
+      text: userInput,
       sender: 'user',
       timestamp: new Date(),
     };
@@ -153,26 +198,27 @@ export default function FloatingChat() {
     };
     setMessages(prev => [...prev, typingMessage]);
 
-    const delay = 1000 + Math.random() * 1500;
-    setTimeout(() => {
-      setMessages(prev => prev.filter(msg => msg.id !== 'typing'));
+    // Panggil AI API
+    const aiResponse = await sendMessageToAI(userInput);
 
-      const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: randomReply,
-        sender: 'bot',
-        timestamp: new Date(),
-      };
+    // Hapus typing indicator
+    setMessages(prev => prev.filter(msg => msg.id !== 'typing'));
 
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(() => { });
-      }
+    const botMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      text: aiResponse,
+      sender: 'bot',
+      timestamp: new Date(),
+    };
 
-      setMessages(prev => [...prev, botMessage]);
-      setIsLoading(false);
-    }, delay);
+    // Play notification sound
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(() => { });
+    }
+
+    setMessages(prev => [...prev, botMessage]);
+    setIsLoading(false);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -212,7 +258,7 @@ export default function FloatingChat() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[380px] h-[550px] bg-white dark:bg-black backdrop-blur-xl border border-neutral-300 dark:border-neutral-700 rounded-3xl shadow-2xl shadow-black/20 dark:shadow-white/10 flex flex-col z-50 animate-scale-in overflow-hidden">
+        <div className="fixed bottom-24 right-6 w-[420px] h-[580px] bg-white dark:bg-black backdrop-blur-xl border border-neutral-300 dark:border-neutral-700 rounded-3xl shadow-2xl shadow-black/20 dark:shadow-white/10 flex flex-col z-50 animate-scale-in overflow-hidden font-sans antialiased">
           {/* Header */}
           <div className="bg-black dark:bg-white px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -273,11 +319,42 @@ export default function FloatingChat() {
                               : 'bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-bl-md'
                               }`}
                           >
-                            {msg.text}
+                            {msg.sender === 'bot' ? (
+                              <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-headings:my-2">
+                                <ReactMarkdown>{msg.text}</ReactMarkdown>
+                              </div>
+                            ) : (
+                              msg.text
+                            )}
                           </div>
-                          <span className="text-xs text-neutral-600 mt-1.5 px-1">
-                            {formatTime(msg.timestamp)}
-                          </span>
+                          <div className="flex items-center gap-2 mt-1.5 px-1">
+                            <span className="text-xs text-neutral-500">
+                              {formatTime(msg.timestamp)}
+                            </span>
+                            {msg.sender === 'bot' && (
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(msg.text);
+                                  setCopiedId(msg.id);
+                                  setTimeout(() => setCopiedId(null), 2000);
+                                }}
+                                className="flex items-center gap-1 text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                                title="Copy response"
+                              >
+                                {copiedId === msg.id ? (
+                                  <>
+                                    <CheckIcon />
+                                    <span className="text-green-500">Copied!</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <CopyIcon />
+                                    <span>Copy</span>
+                                  </>
+                                )}
+                              </button>
+                            )}
+                          </div>
                         </>
                       )}
                     </div>
@@ -326,12 +403,12 @@ export default function FloatingChat() {
       )}
 
       {/* Backdrop */}
-      {isOpen && (
+      {/* {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
-      )}
+      )} */}
     </>
   );
 }

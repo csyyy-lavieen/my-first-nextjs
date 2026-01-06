@@ -67,10 +67,13 @@ export default function Contact() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-black dark:text-white mb-4">
-            <BlurText text="Mari Terhubung" delay={100} />
+            <BlurText text="Let's Collaborate" delay={100} />
           </h2>
           <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
-            Saya selalu terbuka untuk diskusi, kolaborasi, atau sekadar berbincang tentang design dan technology
+            Punya pertanyaan, ide atau mau mengobrol?
+          </p>
+          <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
+            Jangan ragu untuk menghubungi saya lewat kontak dibawah ini
           </p>
         </div>
 

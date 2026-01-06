@@ -35,9 +35,9 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '#home', label: 'Home' },
-    { href: '#about', label: 'Tentang' },
-    { href: '#projects', label: 'Proyek' },
-    { href: '#contact', label: 'Kontak' },
+    { href: '#about', label: 'About' },
+    // { href: '#projects', label: 'Project' },
+    { href: '#contact', label: 'Contact' },
   ];
 
   return (

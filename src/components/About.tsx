@@ -32,14 +32,14 @@ const ToolsIcon = () => (
 export default function About() {
   const skills = [
     { category: 'Design', icon: <DesignIcon />, items: ['Figma', 'UI Design', 'UX Research', 'Prototyping'] },
-    { category: 'Frontend', icon: <CodeIcon />, items: ['React', 'Next.js', 'TypeScript', 'JavaScript'] },
+    { category: 'Frontend', icon: <CodeIcon />, items: ['React', 'Next.js'] },
     { category: 'Styling', icon: <StyleIcon />, items: ['Tailwind CSS', 'CSS3', 'Responsive Design'] },
     { category: 'Tools', icon: <ToolsIcon />, items: ['Git', 'GitHub', 'VS Code'] },
   ];
 
   const stats = [
     { value: '6+', label: 'Project Completed' },
-    { value: '2+', label: 'Years Experience' },
+    { value: '1+', label: 'Years Experience' },
     { value: '100%', label: 'Client Satisfaction' },
   ];
 
@@ -49,10 +49,10 @@ export default function About() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-black dark:text-white mb-4">
-            <BlurText text="Tentang Saya" delay={100} />
+            <BlurText text="About Me" delay={100} />
           </h2>
           <p className="text-xl text-neutral-500 max-w-2xl mx-auto animate-fade-up animation-delay-200">
-            Software Engineer dengan spesialisasi Frontend Development
+            UI/UX Designer yang memiliki pemahaman tentang web development.
           </p>
         </div>
 
@@ -65,8 +65,8 @@ export default function About() {
               Passion saya terletak pada UI/UX Design dan Frontend Development.
             </p>
             <p className="text-neutral-600 dark:text-neutral-400 leading-8 text-lg animate-slide-left animation-delay-300">
-              Sebagai Software Engineer yang berspesialisasi sebagai Frontend Developer, saya percaya bahwa desain yang efektif
-              adalah perpaduan sempurna antara estetika dan fungsionalitas.
+              Sebagai UI/UX Designer, saya percaya bahwa desain yang efektif tidak hanya menarik secara visual, 
+              tetapi juga mampu memberikan pengalaman pengguna yang nyaman dan intuitif.
             </p>
             <p className="text-neutral-600 dark:text-neutral-400 leading-8 text-lg animate-slide-left animation-delay-400">
               Tujuan saya adalah berkembang menjadi profesional yang mampu menciptakan solusi digital inovatif dan

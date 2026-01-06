@@ -22,23 +22,23 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Photo */}
           <div className="flex-shrink-0 flex justify-center lg:justify-start animate-scale-in animation-delay-200">
-            <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-2xl overflow-hidden border-2 border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white transition-all duration-500 group animate-glow">
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96 overflow-hidden transition-all duration-500 group rounded-3xl">
               <Image
-                src="/30a3dea9-5a37-4eca-892d-edf0cc822353.jpg"
+                src="/personalphoto.png"
                 alt="Andi Putra Fathahillah"
-                width={256}
-                height={256}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                width={384}
+                height={384}
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 rounded-3xl"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
             </div>
           </div>
 
           {/* Content */}
           <div className="flex-1 text-center lg:text-left">
             <p className="text-neutral-600 dark:text-neutral-400 font-medium text-lg mb-4 animate-blur-reveal">
-              Halo, saya
+              Let me introduce myself, i am
             </p>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-black dark:text-white">
@@ -48,16 +48,16 @@ export default function Hero() {
             </h1>
 
             <p className="text-xl sm:text-2xl font-medium text-neutral-600 dark:text-neutral-400 mb-6 animate-blur-reveal" style={{ animationDelay: '400ms' }}>
-              <BlurText text="Frontend Developer" delay={600} />
+              <BlurText text="UI UX " delay={600} />
             </p>
 
             <div className="space-y-4 mb-8">
               <p className="text-neutral-500 leading-relaxed text-lg max-w-2xl animate-fade-up animation-delay-300">
-                Siswa SMK jurusan RPL yang sedang menjalani internship di{' '}
+                Siswa SMK Telkom Makassar jurusan RPL yang sedang menjalani internship di{' '}
                 <span className="text-black dark:text-white font-semibold">PT Ashari Tech, Bandung</span>.
               </p>
               <p className="text-neutral-500 leading-relaxed text-lg max-w-2xl animate-fade-up animation-delay-400">
-                Passionate tentang menciptakan pengalaman digital yang memukau dengan fokus pada detail dan performa.
+                Bersemangat dalam menciptakan pengalaman digital yang memukau dengan fokus pada detail dan pengalaman pengguna.
               </p>
             </div>
 
