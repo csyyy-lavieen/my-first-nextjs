@@ -617,7 +617,7 @@ export default function FloatingChat() {
                       <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                     </div>
                     <span className="text-xs text-gray-400">
-                      Sedang memproses gambar...
+                      Sedang memproses...
                     </span>
                   </div>
                 </div>
