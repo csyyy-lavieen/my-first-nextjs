@@ -29,8 +29,21 @@ jobs:
       - run: npm install
       - run: npm i -g vercel
 
-      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Pull Vercel Environment
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
+      - name: Build
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          fi
 
       - name: Deploy
         run: |
