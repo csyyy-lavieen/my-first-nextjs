@@ -1,10 +1,12 @@
 'use client';
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import SplitText from "./animations/SplitText";
 import BlurText from "./animations/BlurText";
-import Particles from "./animations/Particles";
 import GradientText from "./animations/GradientText";
+
+const Particles = dynamic(() => import("./animations/Particles"), { ssr: false });
 
 export default function Hero() {
   return (

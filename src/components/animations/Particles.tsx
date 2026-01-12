@@ -15,6 +15,13 @@ export default function Particles() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
+        // Reduced Motion Check
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Mobile Check (optional simple check, can be refined)
+        const isMobile = window.innerWidth < 768;
+
+        if (prefersReducedMotion || isMobile) return;
+
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -31,7 +38,10 @@ export default function Particles() {
 
         const createParticles = () => {
             particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 15000);
+            // Optimize: Decrease density (15000 -> 20000) and Cap max particles for 4K screens
+            const calculatedCount = Math.floor((canvas.width * canvas.height) / 20000);
+            const count = Math.min(calculatedCount, 100); // Max 100 particles to prevent lag on huge screens
+
             for (let i = 0; i < count; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
@@ -47,6 +57,11 @@ export default function Particles() {
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Optimization: Read DOM only ONCE per frame, not per particle
+            const isDark = document.documentElement.classList.contains('dark');
+            const particleFill = isDark ? '255, 255, 255' : '0, 0, 0';
+            const lineStroke = isDark ? '255, 255, 255' : '0, 0, 0';
+
             particles.forEach((particle) => {
                 particle.x += particle.speedX;
                 particle.y += particle.speedY;
@@ -57,11 +72,7 @@ export default function Particles() {
                 if (particle.y < 0) particle.y = canvas.height;
                 if (particle.y > canvas.height) particle.y = 0;
 
-                // Check theme
-                const isDark = document.documentElement.classList.contains('dark');
-                ctx.fillStyle = isDark
-                    ? `rgba(255, 255, 255, ${particle.opacity})`
-                    : `rgba(0, 0, 0, ${particle.opacity})`;
+                ctx.fillStyle = `rgba(${particleFill}, ${particle.opacity})`;
 
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
@@ -76,11 +87,8 @@ export default function Particles() {
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < 100) {
-                        const isDark = document.documentElement.classList.contains('dark');
                         const opacity = (1 - distance / 100) * 0.2;
-                        ctx.strokeStyle = isDark
-                            ? `rgba(255, 255, 255, ${opacity})`
-                            : `rgba(0, 0, 0, ${opacity})`;
+                        ctx.strokeStyle = `rgba(${lineStroke}, ${opacity})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(p1.x, p1.y);

@@ -11,12 +11,9 @@ interface SplitTextProps {
 export default function SplitText({ text, className = '', delay = 0 }: SplitTextProps) {
     const containerRef = useRef<HTMLSpanElement>(null);
 
-    useEffect(() => {
-        const chars = containerRef.current?.querySelectorAll('.split-char');
-        chars?.forEach((char, index) => {
-            (char as HTMLSpanElement).style.animationDelay = `${delay + index * 50}ms`;
-        });
-    }, [delay]);
+    // Optimized: Removed redundant useEffect that was duplicating style setting
+    // The style is already set directly in the render method below
+
 
     return (
         <span ref={containerRef} className={`inline-flex flex-wrap ${className}`}>
