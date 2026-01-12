@@ -29,6 +29,9 @@ jobs:
       - run: npm install
       - run: npm i -g vercel
 
+      - name: Clean Vercel Cache
+        run: rm -rf .vercel
+
       - name: Pull Vercel Environment
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
