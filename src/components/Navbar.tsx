@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Mobile Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 transition-all duration-300 flex items-center justify-center text-neutral-600 dark:text-neutral-400 active:scale-95"
+            className="w-12 h-12 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 transition-all duration-300 flex items-center justify-center text-neutral-600 dark:text-neutral-400 active:scale-95"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
@@ -85,7 +85,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-neutral-600 dark:text-neutral-400 p-2 hover:text-black dark:hover:text-white rounded-lg transition-colors"
+            className="w-12 h-12 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}

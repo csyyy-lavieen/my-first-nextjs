@@ -425,11 +425,11 @@ export default function FloatingChat() {
             </div>
 
             {/* Header Action Buttons */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center overflow-x-auto no-scrollbar">
               {/* Gallery Button */}
               <button
                 onClick={() => setShowGallery(!showGallery)}
-                className="text-neutral-400 dark:text-neutral-600 hover:text-blue-500 dark:hover:text-blue-400 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-800 dark:hover:bg-neutral-100"
+                className="text-neutral-400 dark:text-neutral-600 hover:text-blue-500 dark:hover:text-blue-400 w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95 hover:bg-neutral-800 dark:hover:bg-neutral-100"
                 title="Galery Photo"
                 aria-label="Buka galeri foto"
               >
@@ -439,7 +439,7 @@ export default function FloatingChat() {
               {/* Clear Chat Button */}
               <button
                 onClick={clearChat}
-                className="text-neutral-400 dark:text-neutral-600 hover:text-red-400 dark:hover:text-red-500 w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-800 dark:hover:bg-neutral-100"
+                className="text-neutral-400 dark:text-neutral-600 hover:text-red-400 dark:hover:text-red-500 w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95 hover:bg-neutral-800 dark:hover:bg-neutral-100"
                 title="Clear chat"
                 aria-label="Hapus riwayat chat"
               >
@@ -449,7 +449,7 @@ export default function FloatingChat() {
               {/* Expand/Minimize Button */}
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-black w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-800 dark:hover:bg-neutral-100"
+                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-black w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95 hover:bg-neutral-800 dark:hover:bg-neutral-100"
                 title={isExpanded ? "Zoom In" : "Zoom Out"}
                 aria-label={isExpanded ? "Kecilkan chat" : "Perbesar chat"}
               >
@@ -462,7 +462,7 @@ export default function FloatingChat() {
                   setIsOpen(false);
                   setIsExpanded(false);
                 }}
-                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-black w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-neutral-800 dark:hover:bg-neutral-100"
+                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-black w-11 h-11 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95 hover:bg-neutral-800 dark:hover:bg-neutral-100"
                 title="Close"
                 aria-label="Tutup chat"
               >
@@ -650,7 +650,7 @@ export default function FloatingChat() {
                   <button
                     key={index}
                     onClick={() => handleSendMessage(prompt.text)}
-                    className="px-3 py-1.5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-200 hover:scale-105"
+                    className="px-3 py-1.5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-full text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-200 hover:scale-105 min-h-[32px] min-w-[32px]"
                   >
                     <span className="mr-1">{prompt.icon}</span>
                     {prompt.text}
@@ -674,7 +674,7 @@ export default function FloatingChat() {
               <button
                 onClick={() => handleSendMessage()}
                 disabled={isLoading || !input.trim()}
-                className="w-11 h-11 sm:w-12 sm:h-12 bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center hover:scale-105 active:scale-95"
+                className="w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center hover:scale-105 active:scale-95"
                 aria-label="Kirim pesan"
               >
                 <SendIcon />

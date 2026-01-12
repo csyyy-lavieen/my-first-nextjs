@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://putrafathahillahporto.vercel.app'),
   title: 'Andi Putra Fathahillah - Web Developer Portfolio',
   description: 'Portfolio Andi Putra Fathahillah, Web Developer Next.js & React',
   keywords: ['web developer', 'next.js', 'react', 'portfolio'],
@@ -40,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="id" className="dark" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

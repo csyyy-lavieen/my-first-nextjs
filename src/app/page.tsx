@@ -2,11 +2,13 @@
 
 import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
-import About from '@/components/About';
-import TechStack from '@/components/Mytools';
-import Projects from '@/components/Projects';
-import Contact from '@/components/Contact';
-import FloatingChat from '@/components/ChatWidget';
+
+// Optimasi Performance: Lazy load komponen di bawah fold
+const About = dynamic(() => import('@/components/About'));
+const TechStack = dynamic(() => import('@/components/Mytools'));
+const Projects = dynamic(() => import('@/components/Projects'));
+const Contact = dynamic(() => import('@/components/Contact'));
+const FloatingChat = dynamic(() => import('@/components/ChatWidget'), { ssr: false });
 
 const Navbar = dynamic(() => import('@/components/Navbar'), {
   ssr: false,
