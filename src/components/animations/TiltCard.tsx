@@ -14,19 +14,26 @@ export default function TiltCard({ children, className = '' }: TiltCardProps) {
         const card = cardRef.current;
         if (!card) return;
 
-        const handleMouseMove = (e: MouseEvent) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
+        let animationFrameId: number;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        const handleMouseMove = (e: MouseEvent) => {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+            animationFrameId = requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
         };
 
         const handleMouseLeave = () => {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
         };
 
@@ -36,6 +43,7 @@ export default function TiltCard({ children, className = '' }: TiltCardProps) {
         return () => {
             card.removeEventListener('mousemove', handleMouseMove);
             card.removeEventListener('mouseleave', handleMouseLeave);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
         };
     }, []);
 

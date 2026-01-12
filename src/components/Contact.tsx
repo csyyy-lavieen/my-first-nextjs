@@ -144,7 +144,7 @@ export default function Contact() {
 
         {/* Footer */}
         <div className="text-center border-t border-neutral-200 dark:border-neutral-800 pt-6 sm:pt-8 animate-fade-up">
-          <p className="text-neutral-600 text-sm sm:text-base mb-2">
+          <p className="text-neutral-700 dark:text-neutral-400 text-sm sm:text-base mb-2">
             © 2026 Andi Putra Fathahillah. All rights reserved.
           </p>
         </div>

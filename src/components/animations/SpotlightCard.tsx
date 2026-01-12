@@ -14,16 +14,25 @@ export default function SpotlightCard({ children, className = '' }: SpotlightCar
         const card = cardRef.current;
         if (!card) return;
 
+        let animationFrameId: number;
+
         const handleMouseMove = (e: MouseEvent) => {
-            const rect = card.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            card.style.setProperty('--mouse-x', `${x}%`);
-            card.style.setProperty('--mouse-y', `${y}%`);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+            animationFrameId = requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', `${x}%`);
+                card.style.setProperty('--mouse-y', `${y}%`);
+            });
         };
 
         card.addEventListener('mousemove', handleMouseMove);
-        return () => card.removeEventListener('mousemove', handleMouseMove);
+        return () => {
+            card.removeEventListener('mousemove', handleMouseMove);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        };
     }, []);
 
     return (
