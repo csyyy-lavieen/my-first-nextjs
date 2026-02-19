@@ -8,11 +8,53 @@ on:
   workflow_dispatch:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+
+      - name: Build
+        run: npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+
+      - name: Lint
+        run: npm run lint
+
   deploy:
     runs-on: ubuntu-latest
+    needs: test
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    outputs:
+      preview_url: ${{ steps.deploy-preview.outputs.url }}
 
     steps:
       - uses: actions/checkout@v4
@@ -30,8 +72,11 @@ jobs:
       - run: npm i -g vercel
 
       - name: Deploy Preview
+        id: deploy-preview
         if: github.event_name == 'pull_request'
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          url=$(vercel deploy --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> $GITHUB_OUTPUT
 
       - name: Deploy Production
         if: github.event_name != 'pull_request'
@@ -39,3 +84,16 @@ jobs:
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
           vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.deploy-preview.outputs.url }}';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview Deployment Ready!**\n\n🔗 **URL:** ${url}\n\n_Deployed from commit ${context.sha.substring(0, 7)}_`
+            });

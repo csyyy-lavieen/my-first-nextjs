@@ -1,8 +1,25 @@
+![Deploy](https://github.com/csyyy-lavieen/my-first-nextjs/actions/workflows/deploy.yml/badge.svg)
+
 # Asharitech Portfolio
 
-A modern, responsive portfolio website built to showcase my projects, skills, and professional journey. This application leverages the latest web technologies to provide a seamless and engaging user experience, including an AI-powered chat widget.
+A modern, responsive portfolio website built to showcase my projects, skills, and professional journey. This application leverages the latest web technologies to provide a seamless and engaging user experience.
 
-## Built With
+## 🚀 Key Features
+
+### Portfolio
+- **Modern Hero Section**: Engaging introduction with smooth animations.
+- **Project Showcase**: Highlights of recent work and contributions.
+- **About & Skills**: Detailed professional profile and technical stack.
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop.
+- **Dark/Light Mode**: Thematic styling for user preference.
+
+### AI Document Editor
+The project includes a powerful **AI Editor** powered by Google Gemini.
+👉 **[View AI Editor Documentation](src/app/ai-editor/README.md)** for detailed setup, testing, and features.
+
+---
+
+## 🛠️ Built With
 
 - **Next.js 15** - The React Framework for the Web
 - **React 19** - JavaScript library for building user interfaces
@@ -10,20 +27,11 @@ A modern, responsive portfolio website built to showcase my projects, skills, an
 - **Tailwind CSS** - Utility-first CSS framework
 - **Google Generative AI** - Powering the intelligent chat widget
 
-## Features
-
-- **Modern Hero Section** - Engaging introduction with smooth animations
-- **AI Chat Widget** - Interactive support assistant powered by Gemini
-- **Project Showcase** - Display of recent works and contributions
-- **About & Skills** - Detailed professional profile and technical stack
-- **Responsive Design** - Fully optimized for mobile, tablet, and desktop
-- **Dark/Light Mode** - Thematic styling for user preference
-
-## Screenshots
+## 📸 Screenshots
 
 ![Screenshot](public/portfolio-screenshot.png)
 
-## Setup
+## 📦 Setup
 
 To get a local copy up and running, follow these steps:
 
@@ -37,6 +45,22 @@ To get a local copy up and running, follow these steps:
    npm run dev
    ```
 
-## Demo
+## 🔗 Demo
 
 🔗 [Live Demo](https://my-first-nextjs.vercel.app)
+
+---
+
+## 🏆 Code Quality Standards
+
+This project adheres to strict development standards:
+
+-   **TypeScript**: Full type safety with interfaces for `Message`, `Document`, and API responses.
+-   **Error Handling**:
+    -   API routes use `try/catch` blocks with proper status codes.
+    -   UI handles loading states and displays user-friendly error messages.
+-   **'use client' Directives**: Correctly applied to interactive components (`AIChat.tsx`, `DocumentEditor.tsx`).
+-   **Clean Code**:
+    -   No `console.log` in production code.
+    -   Complex logic (e.g., search matching, usage of `useCallback`) is documented with comments.
+-   **Modern React**: Utilizes React 19 hooks (`useActionState` where applicable, standard hooks otherwise) and Next.js 15 App Router.
