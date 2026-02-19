@@ -78,7 +78,7 @@ Rules:
 
         // First call with function tools
         let response = await genai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-1.5-flash',
             contents: conversationContents,
             config: {
                 tools: functionTools,
@@ -155,7 +155,7 @@ Rules:
             ]
 
             response = await genai.models.generateContent({
-                model: 'gemini-2.5-flash',
+                model: 'gemini-1.5-flash',
                 contents: followUpContents,
             })
 
